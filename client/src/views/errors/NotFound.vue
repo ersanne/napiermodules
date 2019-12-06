@@ -1,10 +1,12 @@
 <template>
+<VContainer>
 
+</VContainer>
 </template>
 
 <script>
     export default {
-        name: "Home"
+        name: "404"
     }
 </script>
 
