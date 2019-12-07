@@ -5,27 +5,42 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        activeIndex: '',
         drawer: false,
         links: [
             {
-                id: 'module_list',
+                id: '/',
                 text: 'Module List'
             },
             {
-                id: 'saved_modules',
+                id: '/modules/saved',
                 text: 'Saved Modules'
             },
             {
-                id: 'login',
-                text: 'Login'
+                id: 'export',
+                text: 'Export'
             },
             {
-                id: 'registration',
-                text: 'Sign Up'
+                id: 'api-doc',
+                text: 'API'
             }
-        ]
+        ],
+        savedModules: new Set()
     },
-    mutations: {},
+    mutations: {
+        drawer(state, payload) {
+            state.drawer = payload
+        },
+        drawerToggle(state) {
+            state.drawer = !state.drawer
+        },
+        addSavedModule(state, moduleCode) {
+            state.savedModules.add(moduleCode)
+        },
+        removeSavedModule(state, moduleCode) {
+            state.savedModules.delete(moduleCode)
+        }
+    },
     actions: {},
     modules: {}
 })

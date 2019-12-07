@@ -1,14 +1,14 @@
 {
-  "name": "Untitled GraphQL Schema",
-  "schemaPath": "./path/to/schema.graphql",
+  "name": "NapierModules GraphQL Schema",
+  "schemaPath": "./src/schema/",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://url/to/the/graphql/api",
+        "url": "http://localhost:4000/graphql/",
         "headers": {
           "user-agent": "JS GraphQL"
         },
-        "introspect": false
+        "introspect": true
       }
     }
   }

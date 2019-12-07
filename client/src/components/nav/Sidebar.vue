@@ -1,42 +1,24 @@
 <template>
-    <v-toolbar app color="white">
-        <v-toolbar-side-icon
-                color="blue-grey--text text--darken-3"
-                class="hidden-md-and-up"
-                @click.stop="drawerToggle()">
-        </v-toolbar-side-icon>
-        <v-toolbar-title class="headline text-uppercase">
-            <a
-                    href="/"
-                    :class="$style.title"
-                    @click.stop.prevent="$vuetify.goTo(0)">
-                Erik Sanne</a>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn
-                    flat
+    <v-navigation-drawer
+            v-model="drawer"
+            temporary
+            floating
+            app>
+        <v-list>
+            <v-list-item
                     v-for="link in links"
-                    :key="link.title"
+                    :key="link.text"
                     :href="`#${link.id}`"
-                    :ripple="false"
                     :class="[{
-            'primary--text': activeIndex === link.id,
-            'blue-grey--text text--darken-2': activeIndex !== link.id
-          }]"
-                    @click.stop.prevent="$vuetify.goTo(`#${link.id}`)"
-                    :aria-label="link.text"
-                    v-text="link.text">
-            </v-btn>
-        </v-toolbar-items>
-        <a href="/ErikSanne_CV.docx"
-           :class="$style.title">
-            <v-btn round color="primary" class="ma-2">
-                CV
-                <v-icon small>mdi-download</v-icon>
-            </v-btn>
-        </a>
-    </v-toolbar>
+          'primary--text': activeIndex === link.id,
+          'blue-grey--text text--darken-2': activeIndex !== link.id
+        }]"
+                    @click.stop.prevent="onClick(`#${link.id}`)"
+            >
+                <v-list-item-content>{{ link.text }}</v-list-item-content>
+            </v-list-item>
+        </v-list>
+    </v-navigation-drawer>
 </template>
 
 <script>
@@ -44,13 +26,25 @@
     import {mapState} from 'vuex'
 
     export default {
-        name: "Sidebar",
-        computed: mapState([
-            'links'
-        ]),
+        name: 'Sidebar',
+        computed: {
+            drawer: {
+                get() {
+                    return this.$store.state.drawer
+                },
+                set(newValue) {
+                    this.$store.commit('drawer', newValue)
+                }
+            },
+            ...mapState([
+                'links',
+                'activeIndex'
+            ])
+        },
         methods: {
-            drawerToggle() {
-                this.$store.commit('drawerToggle')
+            onClick(hash) {
+                this.drawer = false;
+                this.$vuetify.goTo(hash)
             }
         }
     }

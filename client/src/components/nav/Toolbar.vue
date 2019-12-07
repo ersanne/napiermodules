@@ -1,49 +1,49 @@
 <template>
-    <v-navigation-drawer
-            v-model="drawer"
-            temporary
-            floating
-            app>
-        <v-list>
-            <v-list-tile
+    <v-app-bar app color="primary">
+        <v-app-bar-nav-icon
+                color="blue-grey--text text--darken-3"
+                class="hidden-md-and-up"
+                @click.stop="drawerToggle()">
+        </v-app-bar-nav-icon>
+        <v-toolbar-title class="headline">
+            NapierModules
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+            <v-btn
+                    text
                     v-for="link in links"
-                    :key="link.text"
-                    :href="`#${link.id}`"
+                    :key="link.title"
+                    :to="link.id"
+                    :ripple="false"
                     :class="[{
-          'primary--text': activeIndex === link.id,
-          'blue-grey--text text--darken-2': activeIndex !== link.id
-        }]"
-                    @click.stop.prevent="onClick(`#${link.id}`)"
-            >
-                <v-list-tile-content>{{ link.text }}</v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-    </v-navigation-drawer>
+            'white--text': activeIndex === link.id, //TODO: Select colour
+            'white--text': activeIndex !== link.id
+          }]"
+                    :aria-label="link.text"
+                    v-text="link.text">
+            </v-btn>
+        </v-toolbar-items>
+        <v-toolbar-items>
+            <Search></Search>
+        </v-toolbar-items>
+    </v-app-bar>
 </template>
 
 <script>
     import {mapState} from 'vuex'
+    import Search from "../Search";
 
     export default {
         name: "Toolbar",
-        computed: {
-            drawer: {
-                get() {
-                    return this.$store.state.drawer
-                },
-                set(newValue) {
-                    this.$store.commit('drawer', newValue)
-                }
-            },
-            ..mapState([
-                'links',
-                'activeIndex'
-            ])
-        },
+        components: {Search},
+        computed: mapState([
+            'links',
+            'activeIndex'
+        ]),
         methods: {
-            onClick(hash) {
-                this.drawer = false;
-                this.$vuetify.goTo(hash)
+            drawerToggle() {
+                this.$store.commit('drawerToggle')
             }
         }
 

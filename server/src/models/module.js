@@ -2,11 +2,26 @@ import mongoose, {Schema} from 'mongoose';
 import timestamps from 'mongoose-timestamp';
 import {composeWithMongoose} from 'graphql-compose-mongoose';
 
+export const ActivitySchema = new Schema({
+    mode: String,
+    type: String,
+    study_hours: String
+});
+
+export const AssessmentSchema = new Schema({
+    assessment_type: String,
+    weighting: String,
+    lo_covered: String,
+    week_due: String,
+    length_hours: String,
+    length_words: String
+});
+
 export const ModuleSchema = new Schema({
         _id: String,
         module_title: String,
         scqf_level: String,
-        scqf_level_value: String,
+        scqf_credit_value: String,
         ects_credit_value: String,
         module_leader: {
             name: String,
@@ -37,23 +52,12 @@ export const ModuleSchema = new Schema({
             formative_assessment: [String],
             summative_assessment: [String],
             student_activity: {
-                activities: [{
-                    mode: String,
-                    type: String,
-                    study_hours: String
-                }],
+                activities: [ActivitySchema],
                 total_study_hours: String,
                 expected_study_hours: String
             },
             assessment: {
-                assessments: [{
-                    assessment_type: String,
-                    weighting: String,
-                    lo_covered: String,
-                    week_due: String,
-                    length_hours: String,
-                    length_words: String
-                }],
+                assessments: [AssessmentSchema],
                 component1_subtotal: String,
                 component2_subtotal: String,
                 module_subtotal: String
