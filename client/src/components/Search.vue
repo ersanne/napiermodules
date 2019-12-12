@@ -10,7 +10,7 @@
             item-text="Description"
             item-value="API"
             label="Search Modules"
-            placeholder="Start typing to search"
+            placeholder="Search modules"
             return-object
     ></v-autocomplete>
 </template>
@@ -44,9 +44,6 @@
                 })
             },
             methods: {
-                search () {
-
-                }
             },
         }
     }

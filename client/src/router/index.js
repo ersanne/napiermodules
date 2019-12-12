@@ -5,7 +5,7 @@ import NotFound from '@/views/errors/NotFound'
 // import Home from '@/views/Home'
 import ModuleList from "@/views/ModuleList";
 import SavedModules from "@/views/SavedModules";
-import ModulePage from "../views/ModulePage";
+import ModulePage from "@/views/ModulePage";
 
 Vue.use(VueRouter);
 
@@ -33,9 +33,10 @@ export default new VueRouter({
             component: SavedModules
         },
         {
-            path: '/module/:code',
+            path: '/module/:moduleCode',
             name: 'module-page',
-            component: ModulePage
+            component: ModulePage,
+            props: true
         }
     ]
 })
