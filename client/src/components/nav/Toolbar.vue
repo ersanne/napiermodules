@@ -9,6 +9,9 @@
             NapierModules
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-toolbar-items>
+            <Search></Search>
+        </v-toolbar-items>
         <v-toolbar-items class="hidden-sm-and-down">
             <v-btn
                     text
@@ -23,9 +26,6 @@
                     :aria-label="link.text"
                     v-text="link.text">
             </v-btn>
-        </v-toolbar-items>
-        <v-toolbar-items>
-            <Search></Search>
         </v-toolbar-items>
     </v-app-bar>
 </template>

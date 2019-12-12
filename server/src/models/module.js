@@ -72,6 +72,7 @@ export const ModuleSchema = new Schema({
 ModuleSchema.plugin(timestamps);
 
 ModuleSchema.index({createdAt: 1, updatedAt: 1});
+ModuleSchema.index({name: 'text', 'module_title': 'text'});
 
 export const Module = mongoose.model('Module', ModuleSchema);
 export const ModuleTC = composeWithMongoose(Module);

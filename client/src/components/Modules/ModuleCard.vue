@@ -17,7 +17,7 @@
             <v-btn
                     color="primary"
                     text
-                    :to="{name:'module-page', params: {code: module._id}}">
+                    :to="{name:'module-page', params: {moduleCode: module._id}}">
                 View Details
             </v-btn>
             <v-btn color="primary" text>
@@ -31,7 +31,7 @@
     export default {
         name: "Module",
         props: {
-            module: Object
+            module: Object,
         },
     }
 </script>

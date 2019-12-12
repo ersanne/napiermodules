@@ -1,16 +1,22 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="9">
+            <v-col cols="12"
+                   md="3">
+                <v-row>
+                    <v-col cols="12">
+                        <ModuleFilters></ModuleFilters>
+                    </v-col>
+                </v-row>
+            </v-col>
+            <v-col cols="12"
+                   md="9">
                 <v-row v-for="(module, i) in modules"
                        :key="i">
                     <v-col cols="12">
                         <Module :module="module"></Module>
                     </v-col>
                 </v-row>
-            </v-col>
-            <v-col cols="3">
-                <ModuleFilters></ModuleFilters>
             </v-col>
         </v-row>
 
@@ -19,7 +25,7 @@
 </template>
 
 <script>
-    import Module from "@/components/Modules/Module";
+    import Module from "@/components/Modules/ModuleCard";
     import ModuleFilters from "@/components/Modules/ModuleFilters";
     import gql from 'graphql-tag'
 
