@@ -5,24 +5,16 @@
             Filters
         </v-card-title>
         <v-card-text>
-            <v-list>
-                <v-list-group v-for="(item, i) in filterOptions"
-                              :key="i">
-                    <template v-slot:activator>
-                        <v-list-item-title>{{item.label}}</v-list-item-title>
-                    </template>
-                    <v-list>
-                        <v-list-item
-                                v-for="(choice, i) in item.choices"
-                                :key="i"
-                        >
-                            <v-list-item-content>
-                                <v-checkbox :label="choice"></v-checkbox>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </v-list-group>
-            </v-list>
+            <v-select
+                    v-for="(item, i) in filterOptions"
+                    :key="i"
+                    v-model="item.selection"
+                    :items="item.choices"
+                    :label="item.label"
+                    multiple
+                    chips
+            >
+            </v-select>
         </v-card-text>
     </v-card>
 </template>
