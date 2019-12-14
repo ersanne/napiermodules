@@ -70,9 +70,16 @@ export const ModuleSchema = new Schema({
 );
 
 ModuleSchema.plugin(timestamps);
-
-ModuleSchema.index({createdAt: 1, updatedAt: 1});
 ModuleSchema.index({name: 'text', 'module_title': 'text'});
 
 export const Module = mongoose.model('Module', ModuleSchema);
 export const ModuleTC = composeWithMongoose(Module);
+ModuleTC.addResolver({
+    name: 'distinct',
+    type: ModuleTC,
+    args: {mfield: 'Distinct field'},
+    resolve: async ({source, args, context, info}) => {
+        const distinct = await Module.find().distinct(args.mfield);
+        return distinct;
+    },
+});

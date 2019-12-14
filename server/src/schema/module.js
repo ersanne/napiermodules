@@ -8,6 +8,7 @@ const ModuleQuery = {
     moduleCount: ModuleTC.getResolver('count'),
     moduleConnection: ModuleTC.getResolver('connection'),
     modulePagination: ModuleTC.getResolver('pagination'),
+    moduleDistinct: ModuleTC.getResolver('distinct')
 };
 
 const ModuleMutation = {
