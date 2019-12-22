@@ -8,7 +8,11 @@ const ModuleQuery = {
     moduleCount: ModuleTC.getResolver('count'),
     moduleConnection: ModuleTC.getResolver('connection'),
     modulePagination: ModuleTC.getResolver('pagination'),
-    moduleDistinct: ModuleTC.getResolver('distinct')
+    moduleDistinct: {
+        type: ['String'],
+        args: { fieldName: 'String!' },
+        resolve: (_, { fieldName }) => Module.find().distinct(fieldName)
+    }
 };
 
 const ModuleMutation = {
