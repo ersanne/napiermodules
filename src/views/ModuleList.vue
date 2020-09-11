@@ -39,7 +39,7 @@
         <v-row>
           <v-col cols="10">
             <ApolloQuery v-if="searchText" :query="gql => gql`query search_module_code_title($offset: Int!, $limit: Int!, $searchText: String!) {
-                search_module_code_title(args: {search: $searchText}) {
+                search_modules(args: {search: $searchText}) {
                     code
                     title
                     scqf_level
@@ -49,7 +49,7 @@
                   }
                 }`"
                          :variables="{ offset: offset, limit: pageSize, searchText: searchText }"
-                         :update="data => data.search_module_code_title"
+                         :update="data => data.search_modules"
                          deep
             >
               <template v-slot="{ result: {data}}">
