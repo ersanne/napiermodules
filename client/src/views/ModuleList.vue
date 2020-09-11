@@ -7,7 +7,7 @@
              md="3">
         <v-row>
           <v-col cols="12">
-            <ModuleFilters v-model="filter" @change="filterChanged"></ModuleFilters>
+            <ModuleFilters v-model="filter" v-on:filterChanged="onFilterChanged"></ModuleFilters>
           </v-col>
         </v-row>
       </v-col>
@@ -17,6 +17,7 @@
           <v-col cols="12"
                  md="7">
             <v-text-field
+                v-model="searchText"
                 label="Type to search"
             ></v-text-field>
           </v-col>
@@ -37,8 +38,33 @@
         </v-row>
         <v-row>
           <v-col cols="10">
-            <ApolloQuery :query="gql => gql`query modules($offset: Int!, $limit: Int!, $filter: String!) {
-                    modules(offset: $offset, limit: $limit) {
+            <ApolloQuery v-if="searchText" :query="gql => gql`query search_module_code_title($offset: Int!, $limit: Int!, $searchText: String!) {
+                search_module_code_title(args: {search: $searchText}) {
+                    code
+                    title
+                    scqf_level
+                    scqf_credit_value
+                    school
+                    subject_area_group
+                  }
+                }`"
+                         :variables="{ offset: offset, limit: pageSize, searchText: searchText }"
+                         :update="data => data.search_module_code_title"
+                         deep
+            >
+              <template v-slot="{ result: {data}}">
+                <div v-if="data" class="result apollo">
+                  <v-row v-for="(module, i) in data"
+                         :key="i">
+                    <v-col cols="12">
+                      <Module :module="module"></Module>
+                    </v-col>
+                  </v-row>
+                </div>
+              </template>
+            </ApolloQuery>
+            <ApolloQuery v-else :query="gql => gql`query modules($offset: Int!, $limit: Int!, $filter: modules_bool_exp!) {
+                    modules(offset: $offset, limit: $limit, where: $filter) {
                             code
                             title
                             scqf_level
@@ -49,6 +75,7 @@
                 }`"
                          :variables="{offset: offset, limit: pageSize, filter: filter}"
                          :update="data => data.modules"
+                         deep
             >
               <template v-slot="{ result: {data}}">
                 <div v-if="data" class="result apollo">
@@ -81,7 +108,8 @@ export default {
     pageSizes: [5, 10, 15, 20, 25, 50, 100],
     sort: ["Title Ascending"],
     sortOptions: ["Title Ascending", "Title Descending"],
-    filter: "",
+    filter: {},
+    searchText: "",
   }),
   computed: {
     offset: function () {
@@ -89,7 +117,7 @@ export default {
     },
   },
   methods: {
-    filterChanged(newVal) {
+    onFilterChanged(newVal) {
       this.filter = newVal
     }
   }
