@@ -13,23 +13,11 @@
             </tbody>
         </v-simple-table>
         <h3>Learning, Teaching and Assessment (LTA) Approach:</h3>
-        <p>
-            <template v-for="line in instance.lta_approach">
-                {{line}}<br v-bind:key="line">
-            </template>
-        </p>
+        <p v-html="instance.lta_approach_html"></p>
         <h3>Formative Assessment:</h3>
-        <p>
-            <template v-for="line in instance.formative_assessment">
-                {{line}}<br v-bind:key="line">
-            </template>
-        </p>
+        <p v-html="instance.formative_assessment_html"></p>
         <h3>Summative Assessment:</h3>
-        <p>
-            <template v-for="line in instance.summative_assessment">
-                {{line}}<br v-bind:key="line">
-            </template>
-        </p>
+        <p v-html="instance.summative_assessment_html"></p>
         <v-tabs
                 v-model="tab"
                 centered>
@@ -52,7 +40,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(item, i) in instance.student_activity.activities"
+                    <tr v-for="(item, i) in instance.student_activities"
                         :key="i">
                         <td>{{item.mode}}</td>
                         <td>{{item.type}}</td>
@@ -61,12 +49,12 @@
                     <tr>
                         <td></td>
                         <td>Total Study Hours</td>
-                        <td>{{instance.student_activity.total_study_hours}}</td>
+                        <td>{{instance.total_study_hours}}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Expected Total Study Hours for Module</td>
-                        <td>{{instance.student_activity.expected_study_hours}}</td>
+                        <td>{{instance.expected_total_study_hours}}</td>
                     </tr>
                     </tbody>
                 </v-simple-table>
@@ -84,9 +72,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(item, i) in instance.assessment.assessments"
+                    <tr v-for="(item, i) in instance.assessments"
                         :key="i">
-                        <td>{{item.assessment_type}}</td>
+                        <td>{{item.type}}</td>
                         <td>{{item.weighting}}</td>
                         <td>{{item.lo_covered}}</td>
                         <td>{{item.week_due}}</td>
@@ -95,7 +83,7 @@
                     </tr>
                     <tr>
                         <td>Component 1 subtotal</td>
-                        <td>{{instance.assessment.component1_subtotal}}</td>
+                        <td>{{instance.component1_subtotal}}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -103,7 +91,7 @@
                     </tr>
                     <tr>
                         <td>Component 2 subtotal</td>
-                        <td>{{instance.assessment.component2_subtotal}}</td>
+                        <td>{{instance.component2_subtotal}}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -111,7 +99,7 @@
                     </tr>
                     <tr>
                         <td>Module subtotal</td>
-                        <td>{{instance.assessment.module_subtotal}}</td>
+                        <td>{{instance.module_subtotal}}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -139,11 +127,11 @@
                 {label: 'Partner', field: item => item.partner},
                 {
                     label: 'Member of staff responsible for delivering module',
-                    field: item => `<a :href="${item.delivery_staff_member.email}">${item.delivery_staff_member.name}</a>`
+                    field: item => `<a :href="${item.staff_delivery_staff_member.email}">${item.staff_delivery_staff_member.name}</a>`
                 },
                 {
                     label: 'Module Organiser',
-                    field: item => `<a :href="${item.module_organiser.email}">${item.module_organiser.name}</a>`
+                    field: item => `<a :href="${item.staff_module_organiser.email}">${item.staff_module_organiser.name}</a>`
                 },
             ]
         })

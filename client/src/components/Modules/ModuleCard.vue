@@ -2,10 +2,10 @@
     <v-card class="mx-auto"
             outlined>
         <v-card-title>
-            <span v-text="module.module_title"></span>
+            <span v-text="module.title"></span>
         </v-card-title>
         <v-card-subtitle>
-            <span v-text="module._id"></span>
+            <span v-text="module.code"></span>
         </v-card-subtitle>
         <v-card-text>
             <span v-text="module.school"></span> | <span v-text="module.subject_area_group"></span>
@@ -17,7 +17,7 @@
             <v-btn
                     color="primary"
                     text
-                    :to="{name:'module-page', params: {moduleCode: module._id}}">
+                    :to="{name:'module-page', params: {moduleCode: module.code}}">
                 View Details
             </v-btn>
             <v-btn color="primary" text>
