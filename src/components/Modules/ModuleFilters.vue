@@ -27,8 +27,7 @@
                 @input="changeFilterOptions"
             ></v-autocomplete>
           </div>
-        </template>
-      </ApolloQuery>
+        </template></ApolloQuery>
     </v-card-text>
   </v-card>
 </template>
