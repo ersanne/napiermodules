@@ -14,12 +14,9 @@
                     text
                     v-for="link in links"
                     :key="link.title"
-                    :to="link.id"
+                    :href="link.href"
                     :ripple="false"
-                    :class="[{
-            'white--text': activeIndex === link.id, //TODO: Select colour
-            'white--text': activeIndex !== link.id
-          }]"
+                    class="white--text"
                     :aria-label="link.text"
                     v-text="link.text">
             </v-btn>

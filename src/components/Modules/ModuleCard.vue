@@ -16,22 +16,29 @@
     <v-card-actions>
       <v-btn
           color="primary"
+          outlined
           text
           :to="{name:'module-page', params: {moduleCode: module.code}}">
         View Details
       </v-btn>
-      <v-btn v-if="moduleIsSaved"
-             color="primary"
-             text
-             @click="unsaveModule()">
-        Unsave
+      <v-btn
+          color="primary"
+          text
+          :href="`https://www.modules.napier.ac.uk/Module.aspx?ID=${module.code}`">
+        View on Napier.ac.uk
       </v-btn>
-      <v-btn v-else
-             color="primary"
-             text
-             @click="saveModule()">
-        Save
-      </v-btn>
+<!--      <v-btn v-if="moduleIsSaved"-->
+<!--             color="primary"-->
+<!--             text-->
+<!--             @click="unsaveModule()">-->
+<!--        Unsave-->
+<!--      </v-btn>-->
+<!--      <v-btn v-else-->
+<!--             color="primary"-->
+<!--             text-->
+<!--             @click="saveModule()">-->
+<!--        Save-->
+<!--      </v-btn>-->
     </v-card-actions>
   </v-card>
 </template>
@@ -43,19 +50,19 @@ export default {
   props: {
     module: Object,
   },
-  computed: {
-    moduleIsSaved () {
-      return this.$store.getters.moduleIsSaved(module.code)
-    }
-  },
-  methods: {
-    saveModule() {
-      this.$store.dispatch('saveModule', this.module.code)
-    },
-    unsaveModule() {
-      this.$store.dispatch('removeSavedModule', this.module.code)
-    }
-  }
+  // computed: {
+  //   moduleIsSaved () {
+  //     return this.$store.getters.moduleIsSaved(module.code)
+  //   }
+  // },
+  // methods: {
+  //   saveModule() {
+  //     this.$store.dispatch('saveModule', this.module.code)
+  //   },
+  //   unsaveModule() {
+  //     this.$store.dispatch('removeSavedModule', this.module.code)
+  //   }
+  // }
 }
 </script>
 

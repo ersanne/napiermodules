@@ -9,20 +9,20 @@ export default new Vuex.Store({
         drawer: false,
         links: [
             {
-                id: '/',
+                href: '/',
                 text: 'Module List'
             },
             {
-                id: '/modules/saved',
-                text: 'Saved Modules'
+                href: 'https://www.modules.napier.ac.uk',
+                text: 'View on napier.ac.uk'
             },
         ],
-        savedModules: new Set()
+        // savedModules: new Set()
     },
     getters: {
-        moduleIsSaved: (state) => (code) => {
-            return state.savedModules.has(code);
-        }
+        // moduleIsSaved: (state) => (code) => {
+        //     return state.savedModules.has(code);
+        // }
     },
     mutations: {
         drawer(state, payload) {
@@ -31,20 +31,20 @@ export default new Vuex.Store({
         drawerToggle(state) {
             state.drawer = !state.drawer
         },
-        addSavedModule(state, payload) {
-            state.savedModules.add(payload)
-        },
-        removeSavedModule(state, payload) {
-            state.savedModules.delete(payload)
-        }
+        // addSavedModule(state, payload) {
+        //     state.savedModules.add(payload)
+        // },
+        // removeSavedModule(state, payload) {
+        //     state.savedModules.delete(payload)
+        // }
     },
     actions: {
-        saveModule({commit}, payload) {
-            commit('addSavedModule', payload)
-        },
-        removeSavedModule({commit}, payload) {
-            commit('removeSavedModule', payload)
-        }
+        // saveModule({commit}, payload) {
+        //     commit('addSavedModule', payload)
+        // },
+        // removeSavedModule({commit}, payload) {
+        //     commit('removeSavedModule', payload)
+        // }
     },
     modules: {}
 })

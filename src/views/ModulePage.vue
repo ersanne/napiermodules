@@ -78,7 +78,29 @@
       <div v-else-if="data">
         <v-container>
           <v-row>
-            <h2>{{ data.title }}</h2>
+            <v-col md="10">
+              <h2>{{ data.title }}</h2>
+            </v-col>
+            <v-col class="hidden-md-and-down" md="2">
+              <v-btn
+                  color="primary"
+                  outlined
+                  block
+                  :href="`https://www.modules.napier.ac.uk/Module.aspx?ID=${data.code}`">
+                View on Napier.ac.uk
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col class="hidden-lg-and-up" cols="12" align-self="center">
+              <v-btn
+                  color="primary"
+                  outlined
+                  block
+                  :href="`https://www.modules.napier.ac.uk/Module.aspx?ID=${data.code}`">
+                View on Napier.ac.uk
+              </v-btn>
+            </v-col>
           </v-row>
           <v-row>
             <v-col cols="12"

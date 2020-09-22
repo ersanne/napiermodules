@@ -37,7 +37,9 @@ export default {
   methods: {
     pageChanged: function () {
       this.$emit('pageChanged', this.page)
-      this.$router.replace({name: 'module-list', query: {...this.$route.query, page: this.page}})
+      if(this.$route.query.page !== this.page) {
+        this.$router.replace({name: 'module-list', query: {...this.$route.query, page: this.page}})
+      }
     },
     parseQueryObject: function () {
       if(this.$route.query.page) {

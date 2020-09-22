@@ -8,14 +8,11 @@
             <v-list-item
                     v-for="link in links"
                     :key="link.text"
-                    :href="`#${link.id}`"
-                    :class="[{
-          'primary--text': activeIndex === link.id,
-          'blue-grey--text text--darken-2': activeIndex !== link.id
-        }]"
-                    @click.stop.prevent="onClick(`#${link.id}`)"
+                    :href="link.href"
+                    :class="'primary--text'"
+
             >
-                <v-list-item-content>{{ link.text }}</v-list-item-content>
+                <v-list-item-content><a :href="link.href">{{ link.text }}</a></v-list-item-content>
             </v-list-item>
         </v-list>
     </v-navigation-drawer>
