@@ -16,16 +16,13 @@ export default new Vuex.Store({
                 id: '/modules/saved',
                 text: 'Saved Modules'
             },
-            {
-                id: 'export',
-                text: 'Export'
-            },
-            {
-                id: 'api-doc',
-                text: 'API'
-            }
         ],
         savedModules: new Set()
+    },
+    getters: {
+        moduleIsSaved: (state) => (code) => {
+            return state.savedModules.has(code);
+        }
     },
     mutations: {
         drawer(state, payload) {
@@ -34,13 +31,20 @@ export default new Vuex.Store({
         drawerToggle(state) {
             state.drawer = !state.drawer
         },
-        addSavedModule(state, moduleCode) {
-            state.savedModules.add(moduleCode)
+        addSavedModule(state, payload) {
+            state.savedModules.add(payload)
         },
-        removeSavedModule(state, moduleCode) {
-            state.savedModules.delete(moduleCode)
+        removeSavedModule(state, payload) {
+            state.savedModules.delete(payload)
         }
     },
-    actions: {},
+    actions: {
+        saveModule({commit}, payload) {
+            commit('addSavedModule', payload)
+        },
+        removeSavedModule({commit}, payload) {
+            commit('removeSavedModule', payload)
+        }
+    },
     modules: {}
 })

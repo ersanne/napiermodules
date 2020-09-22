@@ -201,7 +201,7 @@ export default {
       {label: 'Module Code:', field: item => item.code},
       {
         label: 'Module Leader',
-        field: item => `<a :href="${item.staff_module_leader.email}">${item.staff_module_leader.name}</a>`
+        field: item => `<a style="text-decoration: none" href="mailto:${item.staff_module_leader.email}">${item.staff_module_leader.name}</a>`
       },
       {label: 'School:', field: item => item.school},
       {label: 'Subject area group:', field: item => item.subject_area_group},

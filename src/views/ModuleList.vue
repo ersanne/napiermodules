@@ -7,7 +7,7 @@
              md="3">
         <v-row>
           <v-col cols="12">
-            <ModuleFilters v-model="filter" v-on:filterChanged="onFilterChanged"></ModuleFilters>
+            <ModuleFilters v-on:filterChanged="onFilterChanged" :page="page"></ModuleFilters>
           </v-col>
         </v-row>
       </v-col>
@@ -26,6 +26,8 @@
             <v-select
                 v-model="sort"
                 :items="sortOptions"
+                item-text="label"
+                item-value="query"
                 label="Sort by"></v-select>
           </v-col>
           <v-col cols="6"
@@ -38,56 +40,8 @@
         </v-row>
         <v-row>
           <v-col cols="10">
-            <ApolloQuery v-if="searchText" :query="gql => gql`query search_module_code_title($offset: Int!, $limit: Int!, $searchText: String!) {
-                search_modules(args: {search: $searchText}) {
-                    code
-                    title
-                    scqf_level
-                    scqf_credit_value
-                    school
-                    subject_area_group
-                  }
-                }`"
-                         :variables="{ offset: offset, limit: pageSize, searchText: searchText }"
-                         :update="data => data.search_modules"
-                         deep
-            >
-              <template v-slot="{ result: {data}}">
-                <div v-if="data" class="result apollo">
-                  <v-row v-for="(module, i) in data"
-                         :key="i">
-                    <v-col cols="12">
-                      <Module :module="module"></Module>
-                    </v-col>
-                  </v-row>
-                </div>
-              </template>
-            </ApolloQuery>
-            <ApolloQuery v-else :query="gql => gql`query modules($offset: Int!, $limit: Int!, $filter: modules_bool_exp!) {
-                    modules(offset: $offset, limit: $limit, where: $filter) {
-                            code
-                            title
-                            scqf_level
-                            scqf_credit_value
-                            school
-                            subject_area_group
-                    }
-                }`"
-                         :variables="{offset: offset, limit: pageSize, filter: filter}"
-                         :update="data => data.modules"
-                         deep
-            >
-              <template v-slot="{ result: {data}}">
-                <div v-if="data" class="result apollo">
-                  <v-row v-for="(module, i) in data"
-                         :key="i">
-                    <v-col cols="12">
-                      <Module :module="module"></Module>
-                    </v-col>
-                  </v-row>
-                </div>
-              </template>
-            </ApolloQuery>
+            <ModuleSearch :searchText="searchText" :filter="filter" :sort="sort" :page="page" :pageSize="pageSize"></ModuleSearch>
+            <ModulePagination v-on:pageChanged="onPageChanged" :filter="filter" :pageSize="pageSize"></ModulePagination>
           </v-col>
         </v-row>
       </v-col>
@@ -96,29 +50,34 @@
 </template>
 
 <script>
-import Module from "@/components/Modules/ModuleCard";
 import ModuleFilters from "@/components/Modules/ModuleFilters";
+import ModuleSearch from "@/components/Modules/ModuleSearch";
+import ModulePagination from "@/components/Modules/ModulePagination";
 
 export default {
   name: "ModuleList",
-  components: {ModuleFilters, Module},
+  components: {ModulePagination, ModuleSearch, ModuleFilters},
   data: () => ({
     page: 1,
     pageSize: 10,
     pageSizes: [5, 10, 15, 20, 25, 50, 100],
-    sort: ["Title Ascending"],
-    sortOptions: ["Title Ascending", "Title Descending"],
+    sort: { title: "asc" },
+    sortOptions: [
+      { label: "Title Ascending", query: { title: "asc" }},
+      { label: "Title Descending", query: { title: "desc" }}
+      ],
     filter: {},
     searchText: "",
   }),
-  computed: {
-    offset: function () {
-      return (this.page * this.pageSize) - this.pageSize
-    },
+  watch: {
+    page(){}
   },
   methods: {
     onFilterChanged(newVal) {
       this.filter = newVal
+    },
+    onPageChanged(newVal) {
+      this.page = newVal
     }
   }
 }
