@@ -1,29 +1,10 @@
-# napiermodules
+<h3 align="center">NapierModules</h3>
+<p align="center">
+  A better way to look up modules at Edinburgh Napier
+</p>
 
-## Project setup
-```
-npm install
-```
+---
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/390354b3-c5ba-420f-b1f4-267186cbc909/deploy-status)](https://app.netlify.com/sites/napiermodules/deploys)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+View at napiermodules.eriksanne.com!
