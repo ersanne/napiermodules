@@ -4,7 +4,7 @@
     <v-row v-for="(module, i) in modules"
            :key="i">
       <v-col cols="12">
-        <Module :module="module"></Module>
+        <ModuleCard :module="module"></ModuleCard>
       </v-col>
     </v-row>
   </div>
@@ -12,11 +12,11 @@
 
 <script>
 import gql from 'graphql-tag'
-import Module from "@/components/Modules/ModuleCard";
+import ModuleCard from "@/components/Modules/ModuleCard";
 
 export default {
-  name: "ModuleSearch",
-  components: {Module},
+  name: "Modules",
+  components: {ModuleCard},
   props: {
     searchText: String,
     filter: Object,

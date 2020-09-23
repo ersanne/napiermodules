@@ -39,8 +39,8 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="10">
-            <ModuleSearch :searchText="searchText" :filter="filter" :sort="sort" :page="page" :pageSize="pageSize"></ModuleSearch>
+          <v-col cols="12" md="10">
+            <Modules :searchText="searchText" :filter="filter" :sort="sort" :page="page" :pageSize="pageSize"></Modules>
             <ModulePagination v-on:pageChanged="onPageChanged" :filter="filter" :pageSize="pageSize"></ModulePagination>
           </v-col>
         </v-row>
@@ -51,12 +51,12 @@
 
 <script>
 import ModuleFilters from "@/components/Modules/ModuleFilters";
-import ModuleSearch from "@/components/Modules/ModuleSearch";
+import Modules from "@/components/Modules/Modules";
 import ModulePagination from "@/components/Modules/ModulePagination";
 
 export default {
   name: "ModuleList",
-  components: {ModulePagination, ModuleSearch, ModuleFilters},
+  components: {ModulePagination, Modules, ModuleFilters},
   data: () => ({
     page: 1,
     pageSize: 10,

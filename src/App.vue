@@ -1,27 +1,30 @@
 <template>
-    <v-app>
-        <Toolbar></Toolbar>
-        <Sidebar></Sidebar>
-        <v-content>
-            <router-view></router-view>
-        </v-content>
-    </v-app>
+  <v-app>
+    <Toolbar></Toolbar>
+    <Sidebar></Sidebar>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+    <Footer></Footer>
+  </v-app>
 </template>
 
 <script>
-    import Toolbar from "./components/nav/Toolbar";
-    import Sidebar from "./components/nav/Sidebar";
+import Toolbar from "./components/nav/Toolbar";
+import Sidebar from "./components/nav/Sidebar";
+import Footer from "@/components/Footer";
 
-    export default {
-        name: 'App',
+export default {
+  name: 'App',
 
-        components: {
-            Sidebar,
-            Toolbar,
-        },
+  components: {
+    Footer,
+    Sidebar,
+    Toolbar,
+  },
 
-        data: () => ({
-            //
-        }),
-    };
+  data: () => ({
+    //
+  }),
+};
 </script>

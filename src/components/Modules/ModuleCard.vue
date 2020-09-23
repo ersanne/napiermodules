@@ -21,24 +21,18 @@
           :to="{name:'module-page', params: {moduleCode: module.code}}">
         View Details
       </v-btn>
-      <v-btn
-          color="primary"
-          text
-          :href="`https://www.modules.napier.ac.uk/Module.aspx?ID=${module.code}`">
-        View on Napier.ac.uk
-      </v-btn>
-<!--      <v-btn v-if="moduleIsSaved"-->
-<!--             color="primary"-->
-<!--             text-->
-<!--             @click="unsaveModule()">-->
-<!--        Unsave-->
-<!--      </v-btn>-->
-<!--      <v-btn v-else-->
-<!--             color="primary"-->
-<!--             text-->
-<!--             @click="saveModule()">-->
-<!--        Save-->
-<!--      </v-btn>-->
+      <!--      <v-btn v-if="moduleIsSaved"-->
+      <!--             color="primary"-->
+      <!--             text-->
+      <!--             @click="unsaveModule()">-->
+      <!--        Unsave-->
+      <!--      </v-btn>-->
+      <!--      <v-btn v-else-->
+      <!--             color="primary"-->
+      <!--             text-->
+      <!--             @click="saveModule()">-->
+      <!--        Save-->
+      <!--      </v-btn>-->
     </v-card-actions>
   </v-card>
 </template>
@@ -46,7 +40,7 @@
 <script>
 
 export default {
-  name: "Module",
+  name: "ModuleCard",
   props: {
     module: Object,
   },
